@@ -6849,7 +6849,7 @@
         mixins: [Modal],
 
         data: {
-            clsPage: 'uk-modal-page',
+            clsPage: 'uk-modal-pafge',
             selPanel: '.uk-modal-dialog',
             selClose: '.uk-modal-close, .uk-modal-close-default, .uk-modal-close-outside, .uk-modal-close-full'
         },

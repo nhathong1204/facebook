@@ -484,7 +484,7 @@
  */
 
 .uk-modal-page {
-    overflow: hidden;
+    overflow: scroll;
 }
 
 /* Dialog

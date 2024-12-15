@@ -10042,3 +10042,7 @@ html.dark,
         color: #f1f1f1 !important;
     }
 }
+
+.dashed{
+    border-bottom: dashed 1px black;
+}
