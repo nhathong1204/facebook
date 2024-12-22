@@ -26,8 +26,8 @@ class GroupPostTabAdmin(admin.TabularInline):
 
 class PostAdmin(admin.ModelAdmin):
     inlines = [GalleryAdmin, CommentTabAdmin]
-    list_editable = ['user', 'title', 'visibility']
-    list_display = ['thumbnail', 'user', 'title', 'visibility']
+    list_editable = ['user', 'title', 'visibility', 'active']
+    list_display = ['thumbnail', 'user', 'title', 'visibility', 'active']
     prepopulated_fields = {"slug": ("title", )}
 
 class GroupAdmin(admin.ModelAdmin):
