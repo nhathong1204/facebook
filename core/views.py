@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from core.models import Post
 from django.http import JsonResponse
 from django.utils.text import slugify
@@ -6,10 +6,13 @@ import shortuuid
 from django.utils.timesince import timesince
 from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
+@login_required
 def index(request):
+    if not request.user.is_authenticated:
+        return redirect("userauths:sign-in")
     posts = Post.objects.filter(active=True, visibility="Everyone").order_by("-id")
     context = {"posts": posts}
     return render(request, "core/index.html", context)
