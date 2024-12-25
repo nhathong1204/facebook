@@ -37,14 +37,16 @@ def create_post(request):
         )
         post.save()
         
-        context = {
-            "title": post.title,
-            "image_url": post.image.url if post.image else None,
-            "full_name": post.user.profile.full_name,
-            "profile_image": post.user.profile.image.url,
-            "date": timesince(post.date),
-            "id": post.id,
-        }
+        # context = {
+        #     "title": post.title,
+        #     "image_url": post.image.url if post.image else None,
+        #     "full_name": post.user.profile.full_name,
+        #     "profile_image": post.user.profile.image.url,
+        #     "date": timesince(post.date),
+        #     "id": post.id,
+        # }
+        
+        context = {"p": post}
         
         new_post_content = render_to_string('core/async/partial_post_content.html', context)
         return JsonResponse({"new_post_content": new_post_content})
@@ -74,9 +76,17 @@ def like_post(request):
     else:
         post.likes.add(user)
         bool = True
+
+    image_content = ""
+    for index, item in enumerate(post.likes.all()):
+        if index == 0:
+            image_content += f'<img src="{item.profile.image.url}" class="w-6 h-6 rounded-full border-2 border-white dark:border-gray-900" alt="" />'
+        else:
+            image_content += f'<img src="{item.profile.image.url}" class="w-6 h-6 rounded-full border-2 border-white dark:border-gray-900 -ml-2" alt="" />'
     
     data = {
         "bool": bool,
         "likes": post.likes.all().count(),
+        "image_content": image_content,
     }
     return JsonResponse({"data": data})

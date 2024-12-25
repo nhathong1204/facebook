@@ -60,14 +60,21 @@ $(document).on("click", "#like-btn", function(){
             if (response.data.bool === true) {
                 console.log("Liked");
                 console.log(response.data.likes);
-                $("#like-count"+btn_val).text(response.data.likes)
+                console.log(response);
+                $("#like_profile_img"+btn_val).html(response.data.image_content)
+                $(".like-count"+btn_val).text(response.data.likes)
                 $(".like-btn"+btn_val).addClass("text-blue-500")
                 $(".like-btn"+btn_val).removeClass("text-black")
             }else {
                 console.log("Unliked");
                 console.log(response.data.likes);
-                $("#like-count"+btn_val).text(response.data.likes)
-                $("#like-count"+btn_val).text(response.data.likes)
+                console.log(response);
+                $("#like_profile_img"+btn_val).html(response.data.image_content)
+                if(response.data.likes > 0) {
+                    $(".like-count"+btn_val).text(response.data.likes)
+                } else {
+                    $(".like-count"+btn_val).text("Like")
+                }
                 $(".like-btn"+btn_val).addClass("text-black")
                 $(".like-btn"+btn_val).removeClass("text-blue-500")
 
